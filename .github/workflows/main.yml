@@ -30,7 +30,7 @@ jobs:
 
       - name: Deploy to Server via SSH
         run: |
-          ssh your_username@80.78.240.29 << 'EOF'
+          ssh root@80.78.240.29 << 'EOF'
           export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Load nvm
             export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/nvm/versions/node/v18/bin
