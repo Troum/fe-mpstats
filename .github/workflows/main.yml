@@ -1,4 +1,4 @@
-name: Deploy Application
+name: Deploy to Server
 
 on:
   push:
@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.7.0
         with:
@@ -25,22 +30,19 @@ jobs:
 
       - name: Deploy to Server via SSH
         run: |
-          ssh user@80.78.240.29 << 'EOF'
-            cd /var/www/api.mpstats.space
+          ssh your_username@80.78.240.29 << 'EOF'
+          export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Load nvm
+            export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/nvm/versions/node/v18/bin
+            cd /var/www/mpstats.space
             git pull origin main
 
             # Install dependencies
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            npm install
 
-            # Run migrations
-            php artisan migrate --force
+            # Build the application
+            npm run build
 
-            # Clear and cache configurations
-            php artisan optimize:clear
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-
-            # Restart PHP-FPM (ensure the user has permissions)
-            sudo systemctl restart php8.2-fpm
+            # Restart the application using PM2
+            pm2 restart Mpstats
           EOF
