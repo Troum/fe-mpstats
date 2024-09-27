@@ -33,5 +33,5 @@ jobs:
             git pull origin main
             npm install
             npm run build
-            pm2 restart Survey360
+            pm2 restart Mpstats
           EOF
