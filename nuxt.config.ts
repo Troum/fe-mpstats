@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            baseURL: process.env.NUXT_API_URL || 'https://api.mpstats.online/api',
+            baseURL: process.env.NUXT_API_URL || 'https://api.mpstats.space/api',
         }
     },
     css: [
