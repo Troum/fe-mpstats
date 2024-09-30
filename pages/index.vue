@@ -17,10 +17,10 @@ onMounted(() => {
       service: 'oz',
       icon: shallowRef(OzonIcon)
     },
-    {
-      service: 'ym',
-      icon: shallowRef(YandexMarketIcon)
-    }
+    // {
+    //   service: 'ym',
+    //   icon: shallowRef(YandexMarketIcon)
+    // }
   ]
 })
 
