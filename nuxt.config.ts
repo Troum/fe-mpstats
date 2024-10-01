@@ -8,7 +8,18 @@ export default defineNuxtConfig({
     $development: undefined, $env: undefined, $meta: undefined, $production: undefined, $test: undefined,
     ssr: false,
     app: {
-        pageTransition: {name: 'page', mode: 'out-in'}
+        pageTransition: {name: 'page', mode: 'out-in'},
+        head: {
+            charset: 'utf-8',
+            viewport: 'width=device-width, initial-scale=1.0',
+            meta: [
+                {name: 'viewport', content: 'width=device-width, initial-scale=1.0'},
+                {name: 'description', content: 'Сервис для получения статистических данных'},
+            ],
+            link: [
+                {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+            ],
+        }
     },
     modules: ["@nuxt/ui", '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@nuxt/image'],
     // @ts-ignore
