@@ -12,8 +12,9 @@ const resultStore = useResultStore()
 const route = useRoute();
 const {getCategories} = useApiService();
 
-const {data: categories, error}: {
+const {data: categories, pending, error}: {
   data: any,
+  pending: any,
   error: any
 } = await getCategories(<string>route.params.service);
 const step = ref<number>(0)
@@ -36,7 +37,6 @@ const steps = [
     slot: 'results'
   }
 ];
-const pending = ref<boolean>(true)
 
 function nextStep(object: { data: any, step: number }) {
   switch (object.step) {
@@ -53,10 +53,6 @@ function nextStep(object: { data: any, step: number }) {
       break
   }
 }
-
-watch(() => categories, () => {
-  setTimeout(() => pending.value = false, 1500)
-}, {immediate: true})
 
 </script>
 

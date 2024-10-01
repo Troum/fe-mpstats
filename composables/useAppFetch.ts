@@ -7,6 +7,7 @@ export async function useAppFetch<T>(url: string, options: UseFetchOptions<T> = 
     const appStore = useAppStore()
     const config = useRuntimeConfig();
 
+    options.lazy = true;
     options.baseURL = config.public.baseURL;
     options.headers = {
         'Content-Type': 'application/json',
